@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Father's Name</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for data in search_data %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{ data.name }}</td>
+        <td>{{ data.father }}</td>
+        <td><a href="{% url 'profile_details' data.id %}"><button type="button" class="btn btn-outline-info">View Profile</button></a></td>
+      </tr>
+      {% endfor %}
+      
+    </tbody>
+  </table>
+{% endblock %}
