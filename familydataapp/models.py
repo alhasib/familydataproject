@@ -7,31 +7,66 @@ class Profession(models.Model):
     def __str__(self):
         return self.name
 
+class MemberChoices:
+    MALE = 'M'
+    FEMALE = 'F'
+    OTHER = 'O'
+    
+    CHOICES = (
+        (MALE, 'Male'),
+        (FEMALE, 'Female'),
+        (OTHER, 'Others')
+    )
 
 class Member(models.Model):
-    name = models.CharField(max_length=250, blank=True, null=True)
+    name = models.CharField(
+        max_length=250, 
+        blank=True,
+        null=True)
     gender = models.CharField(max_length=1,
-                              choices=(('M', 'Male'), ('F', 'Female')),
+                              choices=MemberChoices.CHOICES,
                               blank=True,
                               null=True,
-                              default=None)
-    father = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null = True,
-                               limit_choices_to={'gender': 'M'},
-                               related_name='children_of_father')
+                              default=MemberChoices.MALE)
+
+    father = models.ForeignKey(
+        "self", on_delete=models.SET_NULL, 
+        blank=True, null = True,
+        limit_choices_to={'gender': 'M'},
+        related_name='children_of_father')
+
     mother = models.ForeignKey('self',
                                blank=True,
                                null=True,
-                               on_delete=models.CASCADE,
+                               on_delete=models.SET_NULL,
+                               default = None,
                                limit_choices_to={'gender': 'F'},
                                related_name='children_of_mother')
-    housband = models.ForeignKey("self", on_delete=models.CASCADE, blank=True, null = True,
-                               limit_choices_to={'gender': 'M'},
-                               related_name='partner_of_women')
 
-    address = models.CharField(max_length = 250, blank = True, null = True)
-    national_id_number = models.IntegerField(blank = True, null = True)
-    date_of_birth = models.DateField(blank=True, null = True)
+    housband = models.ForeignKey(
+        "self", 
+        on_delete=models.CASCADE, 
+        blank=True, null = True, 
+        limit_choices_to={'gender': 'M'},
+        related_name='wives')
+
+    address = models.CharField(
+        max_length = 250, 
+        blank = True, 
+        null = True)
+    national_id_number = models.IntegerField(
+        blank = True, 
+        null = True)
+
+    date_of_birth = models.DateField(
+        blank=True, 
+        null = True)
     date_of_death = models.DateField(blank = True, null = True, default = None)
+    marital_status = models.CharField(max_length=1,
+                              choices=(('M', 'Married'), ('s', 'Unmarried')),
+                              blank=True,
+                              null=True,
+                              default=None)
 
     @property
     def member_age(self):

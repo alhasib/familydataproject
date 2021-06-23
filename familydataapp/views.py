@@ -33,10 +33,20 @@ def search(request):
 def profile_details(request, id):
     member = Member.objects.get(id = id)
     father = Member.objects.get(id = member.father.id)
-    mother = Member.objects.get(id = member.mother.id)
-    sibling = Member.objects.filter(father = father, mother = mother)
-    print(father)
-    print(mother) 
-    print(sibling)
-    context = {'member':member, 'father':father, 'mother':mother, 'sibling':sibling}
+    if member.mother:
+        mother = Member.objects.get(id = member.mother.id)
+    else:
+        mother = ''
+        sibling = Member.objects.filter(father = father, mother = mother)
+    chilrens = member.children_of_father.all()
+    print(chilrens)
+    wife = member.wives.all()
+    print(wife)
+    context = {'member':member, 
+    'father':father,
+     'mother':mother,
+      'sibling':sibling,
+      'wife':wife,
+      'chilrens':chilrens
+      }
     return render(request, 'profile_details.html', context)
