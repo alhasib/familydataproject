@@ -6,14 +6,17 @@
         <div class="col-md-6">
           <h4 class="text-success font-weight-bolder mb-3">{{ member.name|title }}'s Father's Family Data</h4>
           <div class="row text-center justify-content-center">
+              {% if father %}
               <div class="card text-white bg-info mb-3 mr-2" style="max-width: 18rem;">
-                  <div class="card-header bg-info">Grand Father</div>
-                  <div class="card-body">
-                    <h5 class="card-title">{{ father.father.name }}</h5>
-                    <h6>({{ father.father.date_of_birth }} - {{ father.father.date_of_death }})</h6>
-                  </div>
+                <div class="card-header bg-info">Grand Father</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ father.father.name }}</h5>
+                  <h6>({{ father.father.date_of_birth }} - {{ father.father.date_of_death }})</h6>
                 </div>
+              </div>
+             
   
+                
                 <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                   <div class="card-header bg-danger">Grand Mother</div>
                   <div class="card-body">
@@ -22,40 +25,57 @@
                     <h6>({{ father.mother.date_of_birth }} - {{ father.mother.date_of_death }})</h6>
                   </div>
                 </div>
+                {% else %}
+                <h3>No Grand Parent Information Is Available</h3>
+              {% endif %}
           </div>
   
-          <div class="row text-center justify-content-center">
-              <div class="card border-info mb-3 mr-2" style="max-width: 18rem;">
-                  <div class="card-header">Father</div>
-                  <div class="card-body text-info">
-                    <h5 class="card-title">{{ father }}</h5>
-                    <h6>( {{ father.date_of_birth }} - {{ father.date_of_death }} )</h6>
-                    
-                  </div>
-                </div>
-  
-                <div class="card border-danger mb-3" style="max-width: 18rem;">
-                  <div class="card-header">Mother</div>
-                  <div class="card-body text-danger">
-                    <h5 class="card-title">{{ mother }}</h5>
-                    <h6>( {{ mother.date_of_birth }} - {{ mother.date_of_death }})</h6>
-                  </div>
-                </div>
+         <div class="row text-center justify-content-center">
+          {% if father or mother %}
+
+          {% if father %}
+          <div class="card border-info mb-3 mr-2" style="max-width: 18rem;">
+            <div class="card-header">Father</div>
+            <div class="card-body text-info">
+              <h5 class="card-title">{{ father }}</h5>
+              <h6>( {{ father.date_of_birth }} - {{ father.date_of_death }} )</h6>
+              
+            </div>
           </div>
-  
-          <div class="row text-center justify-content-center">
-              {% for sibling in sibling %}
-              <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                  <div class="card-header bg-success">Sibling {{ forloop.counter }}</div>
-                  <div class="card-body">
-                    <h5 class="card-title">{{ sibling.name }}</h5>
-                    <h6>( {{ sibling.date_of_birth }} - {{ sibling.date_of_death }} )</h6>
-                    <h6>{{ sibling.member_age }}</h6>
-                  </div>
-                </div>
-              {% endfor %}
+          {% endif %}
+            
+          {% if mother %}
+          <div class="card border-danger mb-3" style="max-width: 18rem;">
+            <div class="card-header">Mother</div>
+            <div class="card-body text-danger">
+              <h5 class="card-title">{{ mother }}</h5>
+              <h6>( {{ mother.date_of_birth }} - {{ mother.date_of_death }})</h6>
+            </div>
           </div>
+          {% endif %}
+         
+         {% else %}
+         <h3>No Parent Information Is Available</h3>
+         {% endif %}
         </div>
+
+         {% if sibling %}
+         <div class="row text-center justify-content-center">
+          {% for sibling in sibling %}
+          <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+              <div class="card-header bg-success">Sibling {{ forloop.counter }}</div>
+              <div class="card-body">
+                <h5 class="card-title">{{ sibling.name }}</h5>
+                <h6>( {{ sibling.date_of_birth }} - {{ sibling.date_of_death }} )</h6>
+                <h6>{{ sibling.member_age }}</h6>
+              </div>
+            </div>
+          {% endfor %}
+      </div>
+         {% endif %}
+        </div>
+
+        
         <div class="col-md-6">
           <h4 class="text-success font-weight-bolder mb-3">{{ member.name|title }}'s Family Data</h4>
 

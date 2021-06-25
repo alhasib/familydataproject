@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="col-md-6 m-auto">
+        <form action="">
+            <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option selected>Select Blood Group</option>
+                <option value="3">'A' positive (A+)</option>
+                <option value="3">'A' negative (A-)</option>
+                <option value="3">'B' positive (B+)</option>
+                <option value="3">'B' negative (B-)</option>
+                <option value="3">'AB' positive (AB+)</option>
+                <option value="3">'AB' negative (AB-)</option>
+                <option value="1">'O' positive (O+)</option>
+                <option value="2">'O' negative (O-)</option>
+                
+              </select>
+        </form>
+    </div>
+    <div class="col-md-12">
+        <table class="table table-bordered">
+            <thead class="thead" style="color: #ffffff; background-color: #eb6e6e;">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Blood Group</th>
+                <th scope="col">Mobile Number</th>
+                <th scope="col">Last Donate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for member in members %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ member.name }}</td>
+                <td>{{ member.blood_group }}</td>
+                <td>{{ member.mobile_number }}</td>
+                <td>{{ member.last_date_of_blood_donation }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %}

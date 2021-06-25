@@ -18,6 +18,25 @@ class MemberChoices:
         (OTHER, 'Others')
     )
 
+class Division(models.Model):
+    name = models.CharField(max_length = 250)
+
+    def __str__(self):
+        return self.name
+
+class District(models.Model):
+    name = models.CharField(max_length = 250)
+    division = models.ForeignKey(Division, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+class BloodGroup(models.Model):
+    name_of_group = models.CharField(max_length = 250)
+
+    def __str__(self):
+        return self.name
+
 class Member(models.Model):
     name = models.CharField(
         max_length=250, 
@@ -67,6 +86,21 @@ class Member(models.Model):
                               blank=True,
                               null=True,
                               default=None)
+    want_to_donate_blood = models.BooleanField(blank = True, null = True, default = True)
+    blood_group = models.ForeignKey(
+                            'BloodGroup',
+                            on_delete = models.CASCADE,
+                            blank=True,
+                            null=True,
+                            default=None,
+                            )
+    last_date_of_blood_donation = models.DateField(
+        blank = True,
+        null = True,
+    )
+    mobile_number = models.CharField(max_length = 250, blank = True, null = True)
+
+
 
     @property
     def member_age(self):

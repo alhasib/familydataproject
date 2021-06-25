@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{% url 'dashboard' %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -128,20 +128,24 @@
                     <span>Charts</span></a>
             </li>
 
+            <li class="nav-item">
+            </li>
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'blood-doner' %}">
+                    <img src="{% static 'img/blood-drop.png' %}" alt="" style="width:20px;height:20px;">
+                    <span>Blood Doner</span></a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            
 
         </ul>
         <!-- End of Sidebar -->
@@ -173,6 +177,14 @@
                             </div>
                         </div>
                     </form>
+                    <div class="col-auto">
+                        <i class="fas fa-fire-alt fa-2x" style="color:#ee573c" autofocus> 0461-62222</i>
+                        
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-headset fa-2x" style="color:#4f3cb9" autofocus> 999</i>
+                        
+                    </div>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -200,7 +212,6 @@
                                 </form>
                             </div>
                         </li>
-
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
