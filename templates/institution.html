@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-12">
+        <h3 class="mt-5 mb-3" style="font-family: Arial, Helvetica, sans-serif;">All {{ name }}</h3>
+        <table class="table table-striped mt-5">
+            <thead style="color: white;" class="bg-primary">
+              <tr>
+                <th>Name</th>
+                <th>Head Of Institution</th>
+                <th>Head Contact Number</th>
+                <th>Institute Number</th>
+                <th>Location</th>
+    
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in all_institution %}
+              <tr>
+                <td>{{ i.name }}</td>
+                <td>{{ i.head_of_institution }}</td>
+                <td>{{ i.head_contact_number }}</td>
+                <td>{{ i.institution_contact_number }}</td>
+                <td>{{ i.location }}</td>
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %}

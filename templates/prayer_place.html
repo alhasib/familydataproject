@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-12">
+        <h3 class="mt-5 mb-3">All {{ place }}</h3>
+        <table class="table table-striped mt-5">
+            <thead style="color: white;" class="bg-primary">
+              <tr>
+                <th>Name</th>
+                <th>Chairman</th>
+                <th>Vice Chairman</th>
+                <th>Responsible Person 1</th>
+                <th>Responsible Person 2</th>
+                <th>Responsible Person 3</th>
+                <th>Responsible Person 4</th>
+    
+              </tr>
+            </thead>
+            <tbody>
+              {% for i in p_place %}
+              <tr>
+                <td>{{ i.place_name }}</td>
+                <td>{{ i.chairman }}</td>
+                <td>{{ i.vice_chairman }}</td>
+                <td>{{ i.responsible_person_one }}</td>
+                <td>{{ i.responsible_person_two }}</td>
+                <td>{{ i.responsible_person_three }}</td>
+                <td>{{ i.responsible_person_four }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 m-auto">
+    <table class="table table-striped mt-5">
+        <thead style="color: white;" class="bg-primary">
+          <tr>
+            <th>Name</th>
+            <th>Designation</th>
+            <th>Mobile Number</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for number in numbers %}
+          <tr>
+            <td>{{ number.officer_name }}</td>
+            <td>{{ number.designation }}</td>
+            <td>{{ number.mobile_number }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

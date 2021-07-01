@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-6 m-auto">
+    <table class="table table-hover mt-5">
+        <thead class="bg-primary" style="color: white;">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Current Age</th>
+
+          </tr>
+        </thead>
+        <tbody>
+         {% for member in member %}
+         <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ member.name }}</td>
+            <td>{{ member.address }}</td>
+            <td>{{ member.mobile_number }}</td>
+            <td>{{ member.member_age }}</td>
+          </tr>
+         {% endfor %}
+         
+        </tbody>
+      </table>
+</div>
+{% endblock %}

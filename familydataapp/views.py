@@ -72,8 +72,104 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 def blood_doner(request):
-    
-    # members = Member.objects.filter(blood_group = b_group)
 
-    context = {'members':'members'}
+    if request.method == 'POST':
+        print("hasib")
+        b_group = request.POST['blood-group']
+        dist_name = request.POST['area']
+        print(b_group)
+        print(dist_name)
+
+        try:
+            b_group = BloodGroup.objects.get(name_of_group = b_group)
+        except:
+            b_group = None
+
+        print(b_group)
+        
+        try:
+            dist_name = District.objects.get(name__contains = dist_name)
+        except:
+            dist_name = None
+        print(b_group)
+        print(dist_name)
+
+        if dist_name and b_group:
+            try:
+                members = Member.objects.filter(
+                    blood_group__name_of_group = b_group, 
+                    district__name = dist_name,
+                    want_to_donate_blood = True)
+
+                context = {'members':members}
+                return render(request, 'blood_doner.html', context)
+            except:
+                context = {'message':"No Data Faound"}
+                return render(request, 'blood_doner.html', context)
+
+        elif dist_name:
+            print("dd")
+            try:
+                members = Member.objects.filter(
+                    district__name = dist_name,
+                    want_to_donate_blood = True)
+                context = {'members':members}
+                return render(request, 'blood_doner.html', context)
+
+            except:
+                context = {'message':"No Data Faound"}
+                return render(request, 'blood_doner.html', context)
+                
+    
+        elif b_group:
+            print(1)
+            try:
+                members = Member.objects.filter(
+                    blood_group__name_of_group = b_group,
+                    want_to_donate_blood = True)
+            
+                context = {'members':members}
+                return render(request, 'blood_doner.html', context)
+        
+            except:
+                context = {'message':"No Data Faound"}
+                return render(request, 'blood_doner.html', context)
+        else:
+            context = {'message':"No Data Faound"}
+            return render(request, 'blood_doner.html', context)
+
+    members = Member.objects.filter(want_to_donate_blood = True)
+    context = {'members':members}
     return render(request, 'blood_doner.html', context)
+
+import datetime
+def marriagable_list(request):
+    compare_date = datetime.datetime.now() - datetime.timedelta(days=25*365)
+    member = Member.objects.filter(date_of_birth__lte = compare_date, marital_status = "S")
+    print(member)
+    # for member in member:
+    #     print(member.gender)
+    context = {'member':member}
+    return render(request, 'marriagable_list.html', context)
+
+def important_number(request):
+    numbers = ImportantNumber.objects.all()
+    context = {'numbers':numbers}
+    return render(request, 'important_number.html', context)
+
+
+def prayer_place(request, place):
+    p_place = PrayerPlace.objects.filter(place_type = place)
+    context = {'p_place':p_place, 'place':place}
+    return render(request, 'prayer_place.html', context)
+
+def institution(request,name):
+    all_institution = Institution.objects.filter(institute_type = name)
+    context = {'all_institution':all_institution, 'name':name}
+    return render(request, 'institution.html', context)
+
+from familydataapp.forms import*
+def user_login(request):
+    form = UserLoginForm()
+    context = {'form':form}
+    return render(request, 'login.html', context)
