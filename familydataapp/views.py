@@ -169,7 +169,21 @@ def institution(request,name):
     return render(request, 'institution.html', context)
 
 from familydataapp.forms import*
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
+
 def user_login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username = username, password = password)
+        if user:
+            login(request, user)
+            return redirect('/home')
     form = UserLoginForm()
     context = {'form':form}
     return render(request, 'login.html', context)
+
+def user_logout(request):
+    logout(request)
+    return redirect('/login')

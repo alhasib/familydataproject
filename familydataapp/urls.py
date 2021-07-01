@@ -6,7 +6,8 @@ from .views import *
 urlpatterns = [
     path('home', home),
     path('dashboard', dashboard, name = 'dashboard'),
-    path('login', user_login, name = 'login'),
+    path('login', user_login, name = 'user_login'),
+    path('logout', user_logout, name = 'user_logout'),
     path('Institution/<name>', institution, name = 'institution'),
     path('prayer-place/<place>', prayer_place, name = 'prayer-place'),
     path('important-number', important_number, name = 'important_number'),

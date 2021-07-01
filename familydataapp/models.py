@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import *
 # Create your models here.
 class Profession(models.Model):
     name = models.CharField(max_length = 250, blank = True, null = True)
@@ -44,6 +44,12 @@ class BloodGroup(models.Model):
 
 class Member(models.Model):
     # crime_point = 
+    user = models.OneToOneField(User, 
+    on_delete = models.SET_NULL,
+    blank = True,
+    null = True,
+    related_name="member")
+    photo = models.ImageField(blank = True, null = True)
     name = models.CharField(
         max_length=250, 
         blank=True,
