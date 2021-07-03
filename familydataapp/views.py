@@ -187,3 +187,17 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('/login')
+
+def crime_point(request):
+    all_places = CrimePlace.objects.all()
+    context = {'all_places':all_places}
+    return render(request, 'crime_point.html', context)
+
+
+def crime_team(request, id):
+    place = CrimePlace.objects.get(id = id)
+    teams = CrimeTeam.objects.filter(crime_location = place)
+    for i in teams:
+        print(i.member.all())
+    context = {'teams':teams}
+    return render(request, 'crime_team.html', context)

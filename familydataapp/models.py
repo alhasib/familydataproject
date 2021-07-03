@@ -6,10 +6,6 @@ class Profession(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class CrimePoint(models.Model):
-    location = models.CharField(max_length = 250)
     
 
 class MemberChoices:
@@ -41,6 +37,33 @@ class BloodGroup(models.Model):
 
     def __str__(self):
         return self.name_of_group
+
+
+class CrimePlace(models.Model):
+    location = models.CharField(max_length = 250)
+    near_identity_one = models.CharField(max_length = 250, blank = True, null = True)
+    near_identity_two = models.CharField(max_length = 250, blank = True, null = True)
+    near_identity_three = models.CharField(max_length = 250, blank = True, null = True)
+    near_identity_four = models.CharField(max_length = 250, blank = True, null = True)
+
+    def __str__(self):
+        return self.location
+
+
+class CrimeType(models.Model):
+    name = models.CharField(max_length = 250)
+
+    def __str__(self):
+        return self.name
+
+class CrimeTeam(models.Model):
+    crime_type = models.ForeignKey(CrimeType, 
+    on_delete = models.SET_NULL,
+    blank = True,
+    null = True,)
+    crime_location = models.ManyToManyField(CrimePlace, related_name = 'team_in_here')
+    member = models.ManyToManyField('Member')
+
 
 class Member(models.Model):
     # crime_point = 

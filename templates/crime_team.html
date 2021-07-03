@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        {% for team in teams %}
+    <div class="col-xl-4 col-md-4">
+        
+     <table class="table table-bordered mt-5">
+         <thead class="bg-primary text-white">
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">Name</th>
+             <th scope="col">Father</th>
+             <th scope="col">Mobile</th>
+           </tr>
+         </thead>
+         <tbody>
+             {% for member in team.member|all %}
+           <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ member.name }}</td>
+            <td>{{ member.father }}</td>
+            <td>{{ member.mobile_number }}</td>
+          </tr>
+           {% endfor %}
+         </tbody>
+       </table>
+       
+    </div>
+    {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}
