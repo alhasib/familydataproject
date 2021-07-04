@@ -64,6 +64,8 @@ class CrimeTeam(models.Model):
     crime_location = models.ManyToManyField(CrimePlace, related_name = 'team_in_here')
     member = models.ManyToManyField('Member')
 
+    def __str__(self):
+        return str(self.crime_type)
 
 class Member(models.Model):
     # crime_point = 

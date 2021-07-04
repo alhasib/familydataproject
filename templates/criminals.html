@@ -1,14 +1,10 @@
-
 {% extends 'base.html' %}
-{% load custom_tags %}
 {% block content %}
 <div class="container">
 
     <div class="row">
-        {% for team in teams %}
-    <div class="col-xl-4 col-md-4">
-      <button class="btn btn-primary">{{ team.crime_type.name }}</button>
-
+        {% for criminal in crimminals %}
+    <div class="col-xl-6 col-md-6">
      <table class="table table-bordered">
      
       <thead class="bg-primary text-white">
@@ -20,14 +16,12 @@
            </tr>
          </thead>
          <tbody>
-             {% for member in team|custom_filter %}
            <tr>
             <th scope="row">{{ forloop.counter }}</th>
-            <td>{{ member.name }}</td>
-            <td>{{ member.father }}</td>
-            <td>{{ member.mobile_number }}</td>
+            <td>{{ criminal.name }}</td>
+            <td>{{ criminal.father }}</td>
+            <td>{{ criminal.mobile_number }}</td>
           </tr>
-           {% endfor %}
          </tbody>
        </table>
        

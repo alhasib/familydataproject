@@ -197,7 +197,12 @@ def crime_point(request):
 def crime_team(request, id):
     place = CrimePlace.objects.get(id = id)
     teams = CrimeTeam.objects.filter(crime_location = place)
-    for i in teams:
-        print(i.member.all())
+    # for i in teams:
+    #     print(i.member.all())
     context = {'teams':teams}
     return render(request, 'crime_team.html', context)
+
+
+def criminals(request):
+    all_criminals = Member.objects.filter()
+    return render(request, 'criminals.html')
