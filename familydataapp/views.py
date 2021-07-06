@@ -204,5 +204,6 @@ def crime_team(request, id):
 
 
 def criminals(request):
-    all_criminals = Member.objects.filter()
-    return render(request, 'criminals.html')
+    all_criminals = Member.objects.filter(is_criminal = True)
+    context = {'all_criminals':all_criminals}
+    return render(request, 'criminals.html', context)

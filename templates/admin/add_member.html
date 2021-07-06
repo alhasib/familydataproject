@@ -1,0 +1,17 @@
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="col-md-12 m-auto">
+        {% if forms %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            
+        {{ forms }}
+        <button type="submit " class="button rounded p-3 mt-5 mb-5 btn-lg btn-block">Add Member</button>
+        </form>
+        
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

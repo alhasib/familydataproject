@@ -1,0 +1,28 @@
+.form_field{
+    background-color: #e6e9ec;
+    padding: 3%;
+    border-radius: 15px;
+    border:none;
+    margin-top: 5px;
+    
+    
+}
+
+option{
+    background-color: #e6e9ec;
+  
+    
+    
+}
+
+.checkbox {width: 50%; height: 30px;
+            background-color: #e6e9ec;
+        border-radius: 5px; }
+
+.button{
+    background-color: #041751;
+    border-radius: 15px;
+    color: white;
+    border: none;
+
+}

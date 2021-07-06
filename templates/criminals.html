@@ -3,9 +3,10 @@
 <div class="container">
 
     <div class="row">
-        {% for criminal in crimminals %}
-    <div class="col-xl-6 col-md-6">
-     <table class="table table-bordered">
+    {% if all_criminals %}
+    <div class="col-xl-10 col-md-8 m-auto">
+      <h3>All Criminals</h3>
+     <table class="table table-bordered mt-5">
      
       <thead class="bg-primary text-white">
            <tr>
@@ -16,17 +17,20 @@
            </tr>
          </thead>
          <tbody>
+         {% for criminal in all_criminals %}
            <tr>
             <th scope="row">{{ forloop.counter }}</th>
             <td>{{ criminal.name }}</td>
             <td>{{ criminal.father }}</td>
             <td>{{ criminal.mobile_number }}</td>
           </tr>
+          {% endfor %}
          </tbody>
        </table>
        
     </div>
-    {% endfor %}
+    {% endif %}
+    
     </div>
     
 </div>

@@ -70,15 +70,19 @@ class CrimeTeam(models.Model):
 class Member(models.Model):
     # crime_point = 
     user = models.OneToOneField(User, 
-    on_delete = models.SET_NULL,
-    blank = True,
-    null = True,
-    related_name="member")
+                                    on_delete = models.SET_NULL,
+                                    blank = True,
+                                    null = True,
+                                    related_name="member")
+    is_criminal = models.BooleanField(default = False,
+                                      blank = True,
+                                      null = True)
+    
     photo = models.ImageField(blank = True, null = True)
     name = models.CharField(
-        max_length=250, 
-        blank=True,
-        null=True)
+                            max_length=250, 
+                            blank=True,
+                            null=True)
     gender = models.CharField(max_length=1,
                               choices=MemberChoices.CHOICES,
                               blank=True,
