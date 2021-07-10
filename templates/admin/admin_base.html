@@ -52,101 +52,48 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
-
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
+                <i class="fas fa-plus fa-2x"></i>                    
                     <span>Crime</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'crime_point' %}">Crime Points</a>
-                        <a class="collapse-item" href="{% url 'criminals' %}">Criminals</a>
+                        <a class="collapse-item" href="{% url 'crime_point' %}">Add Crime Points</a>
+                        <a class="collapse-item" href="{% url 'criminals' %}">Add Crime Types</a>
+                        <a class="collapse-item" href="{% url 'add_crime_team' %}">Add Crime Team</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
+
+          
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-university"></i>
-                    <span>Institution</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'institution' 'Kindergarten' %}">kindergarten</a>
-                        <a class="collapse-item" href="{% url 'institution' 'School' %}">School</a>
-                        <a class="collapse-item" href="{% url 'institution' 'College' %}">College</a>
-                        <a class="collapse-item" href="{% url 'institution' 'Madrasha' %}">Madrasha</a>
-                        <a class="collapse-item" href="{% url 'institution' 'University' %}">University</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="{% url 'add_prayer_place' %}">
+                <i class="fas fa-plus fa-2x"></i>                    
+                <span>Add Prayer Place</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Addons
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-                    aria-controls="collapsePages">
-                    <i class="fas fa-peace"></i>
-                    <span>Prayer Place</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{% url 'prayer-place' 'Masjid' %}">Masjid</a>
-                        <a class="collapse-item" href="{% url 'prayer-place' 'Mandir' %}">Mandir</a>
-
-                    </div>
-                </div>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'add_institute' %}">
+                <i class="fas fa-plus fa-2x"></i>                    
+                <span>Add Institute</span></a>
             </li>
-
-            <!-- Nav Item - Charts -->
+            
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'add_member' %}">
                 <i class="fas fa-plus fa-2x"></i>                    
                 <span>Add Member</span></a>
             </li>
 
-            <li class="nav-item">
-            </li>
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'blood-doner' %}">
-                    <img src="{% static 'img/blood-drop.png' %}" alt="" style="width:20px;height:20px;">
-                    <span>Blood Doner</span></a>
-            </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'marriagable-list' %}">
-                    <i class="fas fa-restroom fa-2x"></i>
-                    <span>Marriageable List</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'important_number' %}">
-                    <i class="fas fa-exclamation-circle fa-2x"></i>
-                    <span>Important Number</span></a>
+                <a class="nav-link" href="{% url 'add_number' %}">
+                <i class="fas fa-plus fa-2x"></i>                    
+                    <span>Add Important Number</span></a>
             </li>
 
    

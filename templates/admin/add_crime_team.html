@@ -3,6 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="col-md-12 m-auto">
+    <h3>Add Crime Team</h3>
         {% if msg %}
         <div class="alert alert-success" role="alert">
             {{ msg }}
@@ -12,7 +13,7 @@
             {% csrf_token %}
 
             {{ forms }}
-            <button type="submit " class="button p-3 mt-5 mb-5 btn-lg btn-block">Add Member</button>
+            <button type="submit " class="button p-3 mt-5 mb-5 btn-lg btn-block">Add Team</button>
         </form>
     </div>
 </div>

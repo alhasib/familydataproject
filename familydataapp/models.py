@@ -27,7 +27,7 @@ class Division(models.Model):
 
 class District(models.Model):
     name = models.CharField(max_length = 250)
-    division = models.ForeignKey(Division, on_delete = models.CASCADE)
+    division = models.ForeignKey(Division, on_delete = models.SET_NULL, blank = True, null = True)
 
     def __str__(self):
         return self.name
@@ -105,7 +105,7 @@ class Member(models.Model):
 
     housband = models.ForeignKey(
         "self", 
-        on_delete=models.CASCADE, 
+        on_delete=models.SET_NULL, 
         blank=True, null = True, 
         limit_choices_to={'gender': 'M'},
         related_name='wives')
@@ -128,9 +128,10 @@ class Member(models.Model):
                               null=True,
                               default=None)
     want_to_donate_blood = models.BooleanField(blank = True, null = True, default = True)
+
     blood_group = models.ForeignKey(
                             'BloodGroup',
-                            on_delete = models.CASCADE,
+                            on_delete = models.SET_NULL,
                             blank=True,
                             null=True,
                             default=None,
