@@ -139,16 +139,27 @@ class CrimePlaceForm(ModelForm):
         
         widgets = {
                         
-                        
+                    'near_identity_four':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
+                    
                     'near_identity_one':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
-                    
-                    r_identity_one':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
 
-                    r_identity_one':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
+                    'near_identity_two':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
                     
-                    r_identity_one':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
+                    'near_identity_three':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Near Identity One..."}),
 
                         
                     'location':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Location..."}),
 
         }
+
+class CrimeTypeForm(ModelForm):
+
+    class Meta:
+        model = CrimeType
+        fields = ['name']
+        
+        widgets = {
+            'name':forms.TextInput(attrs={'class':'form-control form_field', 'placeholder':"Enter Crime Type..."}),
+
+        }
+

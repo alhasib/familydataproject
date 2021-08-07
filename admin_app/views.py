@@ -93,3 +93,31 @@ def add_crime_team(request):
         context = {'forms':forms}
         return render(request, 'admin/add_crime_team.html', context)
     return render(request, 'admin/add_crime_team.html')
+
+
+def add_crime_type(request):
+    if request.method == 'POST':
+        form = CrimeTypeForm(request.POST)
+        if form.is_valid():
+            form = form.save()
+            msg = "Crime Team Added Successfully!"
+            context = {'form':form, 'msg':msg}
+            return render(request, 'admin/add_crime_type.html', context)
+    else:
+        form = CrimeTypeForm()
+        context = {'form':form}
+        return render(request, 'admin/add_crime_type.html', context)
+    
+def add_crime_place(request):
+    if request.method == 'POST':
+        form = CrimePlaceForm(request.POST)
+        if form.is_valid():
+            form = form.save()
+            msg = "Crime place Added Successfully!"
+            form = CrimePlaceForm()
+            context = {'form':form, 'msg':msg}
+            return render(request, 'admin/add_crime_place.html', context)
+    else:
+        form = CrimePlaceForm()
+        context = {'form':form}
+        return render(request, 'admin/add_crime_place.html', context)
