@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from .models import *
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 
+# Create your views here.
+# @login_required(login_url='/login')
 def home(request):
     return render(request, 'home.html')
 
+@login_required(login_url='/login')
 def search(request):
     if request.method == 'GET':
         search_value = request.GET.get('search')
@@ -29,7 +32,7 @@ def search(request):
     # return render(req)
     return render(request, 'search_data.html')
 
-
+@login_required(login_url='/login')
 def profile_details(request, id):
     member = Member.objects.get(id = id)
     if member.father:
@@ -71,6 +74,7 @@ def dashboard(request):
 
     return render(request, 'dashboard.html')
 
+@login_required(login_url='/login')
 def blood_doner(request):
 
     if request.method == 'POST':
@@ -143,6 +147,7 @@ def blood_doner(request):
     return render(request, 'blood_doner.html', context)
 
 import datetime
+@login_required(login_url='/login')
 def marriagable_list(request):
     compare_date = datetime.datetime.now() - datetime.timedelta(days=25*365)
     member = Member.objects.filter(date_of_birth__lte = compare_date, marital_status = "S")
@@ -152,17 +157,22 @@ def marriagable_list(request):
     context = {'member':member}
     return render(request, 'marriagable_list.html', context)
 
+
+@login_required(login_url='/login')
 def important_number(request):
     numbers = ImportantNumber.objects.all()
     context = {'numbers':numbers}
     return render(request, 'important_number.html', context)
 
 
+@login_required(login_url='/login')
 def prayer_place(request, place):
     p_place = PrayerPlace.objects.filter(place_type = place)
     context = {'p_place':p_place, 'place':place}
     return render(request, 'prayer_place.html', context)
 
+
+@login_required(login_url='/login')
 def institution(request,name):
     all_institution = Institution.objects.filter(institute_type = name)
     context = {'all_institution':all_institution, 'name':name}
@@ -172,6 +182,7 @@ from familydataapp.forms import*
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 
+
 def user_login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -180,14 +191,19 @@ def user_login(request):
         if user:
             login(request, user)
             return redirect('/home')
-    form = UserLoginForm()
-    context = {'form':form}
-    return render(request, 'login.html', context)
+        else:
+            msg = "Invalid Username Or passowrd"
+            context = {'msg':msg}
+            return render(request, 'login.html', context)
+    # form = UserLoginForm()
+    # context = {'form':form}
+    return render(request, 'login.html')
 
 def user_logout(request):
     logout(request)
     return redirect('/login')
 
+@login_required(login_url='/login')
 def crime_point(request):
     all_places = CrimePlace.objects.all()
     context = {'all_places':all_places}

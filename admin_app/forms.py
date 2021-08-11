@@ -1,6 +1,8 @@
 from familydataapp.models import *
 from django.forms import ModelForm
 from django import forms
+
+
 class MemberForm(ModelForm):
     blood_group = forms.ModelChoiceField(widget = forms.Select(attrs={'class':'form-control form_field',}), queryset=BloodGroup.objects.all(), required=False)
     
