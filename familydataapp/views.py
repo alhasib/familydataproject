@@ -3,14 +3,17 @@ from .models import *
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-# @login_required(login_url='/login')
+
+@login_required(login_url='/')
 def home(request):
     return render(request, 'home.html')
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def search(request):
     if request.method == 'GET':
+        print("hasib")
         search_value = request.GET.get('search')
+        print(search_value)
         print(search_value.isnumeric())
         if search_value.isnumeric():
             try:
@@ -32,7 +35,7 @@ def search(request):
     # return render(req)
     return render(request, 'search_data.html')
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def profile_details(request, id):
     member = Member.objects.get(id = id)
     if member.father:
@@ -74,7 +77,7 @@ def dashboard(request):
 
     return render(request, 'dashboard.html')
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def blood_doner(request):
 
     if request.method == 'POST':
@@ -147,7 +150,7 @@ def blood_doner(request):
     return render(request, 'blood_doner.html', context)
 
 import datetime
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def marriagable_list(request):
     compare_date = datetime.datetime.now() - datetime.timedelta(days=25*365)
     member = Member.objects.filter(date_of_birth__lte = compare_date, marital_status = "S")
@@ -158,21 +161,21 @@ def marriagable_list(request):
     return render(request, 'marriagable_list.html', context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def important_number(request):
     numbers = ImportantNumber.objects.all()
     context = {'numbers':numbers}
     return render(request, 'important_number.html', context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def prayer_place(request, place):
     p_place = PrayerPlace.objects.filter(place_type = place)
     context = {'p_place':p_place, 'place':place}
     return render(request, 'prayer_place.html', context)
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def institution(request,name):
     all_institution = Institution.objects.filter(institute_type = name)
     context = {'all_institution':all_institution, 'name':name}
@@ -201,15 +204,15 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    return redirect('/login')
+    return redirect('/')
 
-@login_required(login_url='/login')
+@login_required(login_url='/')
 def crime_point(request):
     all_places = CrimePlace.objects.all()
     context = {'all_places':all_places}
     return render(request, 'crime_point.html', context)
 
-
+@login_required(login_url='/')
 def crime_team(request, id):
     place = CrimePlace.objects.get(id = id)
     teams = CrimeTeam.objects.filter(crime_location = place)
@@ -218,7 +221,7 @@ def crime_team(request, id):
     context = {'teams':teams}
     return render(request, 'crime_team.html', context)
 
-
+@login_required(login_url='/')
 def criminals(request):
     all_criminals = Member.objects.filter(is_criminal = True)
     context = {'all_criminals':all_criminals}
