@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import *
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+
 
 @login_required(login_url='/')
 def home(request):
@@ -79,75 +79,100 @@ def dashboard(request):
 
 @login_required(login_url='/')
 def blood_doner(request):
-
-    if request.method == 'POST':
-        print("hasib")
-        b_group = request.POST['blood-group']
-        dist_name = request.POST['area']
-        print(b_group)
-        print(dist_name)
-
-        try:
-            b_group = BloodGroup.objects.get(name_of_group = b_group)
-        except:
-            b_group = None
-
-        print(b_group)
+    members = Member.objects.filter(
+        want_to_donate_blood = True)
+    
+    b_group = request.GET.get('blood_group')
+    if b_group:
+        members = members.filter(
+            blood_group__name_of_group = b_group)
         
-        try:
-            dist_name = District.objects.get(name__contains = dist_name)
-        except:
-            dist_name = None
-        print(b_group)
-        print(dist_name)
+    dist_name = request.GET.get('area')
+    if dist_name:
+        members = members.filter(
+            district__name = dist_name)
+    
+    blood_groups = BloodGroup.objects.all()
+    districts = District.objects.all()
+    
+    context = {
+        'blood_groups':blood_groups,
+        'districts':districts,
+        'members':members,
+        }
+    
+    return render(request, 'blood_doner.html', context)
 
-        if dist_name and b_group:
-            try:
-                members = Member.objects.filter(
-                    blood_group__name_of_group = b_group, 
-                    district__name = dist_name,
-                    want_to_donate_blood = True)
+    # if request.method == 'POST':
+        
+    #     print("hasib")
+    #     b_group = request.POST['blood_group']
+    #     dist_name = request.POST['area']
+    #     context.update({'b_group':b_group, 'dist_name':dist_name})
+    #     print(b_group)
+    #     print(dist_name)
 
-                context = {'members':members}
-                return render(request, 'blood_doner.html', context)
-            except:
-                context = {'message':"No Data Faound"}
-                return render(request, 'blood_doner.html', context)
+    #     try:
+    #         b_group = blood_groups.get(name_of_group = b_group)
+    #     except:
+    #         b_group = None
 
-        elif dist_name:
-            print("dd")
-            try:
-                members = Member.objects.filter(
-                    district__name = dist_name,
-                    want_to_donate_blood = True)
-                context = {'members':members}
-                return render(request, 'blood_doner.html', context)
+    #     print(b_group)
+        
+    #     try:
+    #         dist_name = districts.get(name__contains = dist_name)
+    #     except:
+    #         dist_name = None
+    #     print(b_group)
+    #     print(dist_name)
 
-            except:
-                context = {'message':"No Data Faound"}
-                return render(request, 'blood_doner.html', context)
+    #     if dist_name and b_group:
+    #         try:
+    #             members = Member.objects.filter(
+    #                 blood_group__name_of_group = b_group, 
+    #                 district__name = dist_name,
+    #                 want_to_donate_blood = True)
+
+    #             context['members'] = members
+    #             return render(request, 'blood_doner.html', context)
+    #         except:
+    #             context['message'] = "No Data Found"
+    #             return render(request, 'blood_doner.html', context)
+
+    #     elif dist_name:
+    #         print("dd")
+    #         try:
+    #             members = Member.objects.filter(
+    #                 district__name = dist_name,
+    #                 want_to_donate_blood = True)
+    #             context['members'] = members
+    #             return render(request, 'blood_doner.html', context)
+
+    #         except:
+    #             context['message'] = "No Data Found"
+    #             return render(request, 'blood_doner.html', context)
                 
     
-        elif b_group:
-            print(1)
-            try:
-                members = Member.objects.filter(
-                    blood_group__name_of_group = b_group,
-                    want_to_donate_blood = True)
+    #     elif b_group:
+    #         print(1)
+    #         try:
+    #             members = Member.objects.filter(
+    #                 blood_group__name_of_group = b_group,
+    #                 want_to_donate_blood = True)
             
-                context = {'members':members}
-                return render(request, 'blood_doner.html', context)
+    #             context['members'] = members
+    #             return render(request, 'blood_doner.html', context)
         
-            except:
-                context = {'message':"No Data Faound"}
-                return render(request, 'blood_doner.html', context)
-        else:
-            context = {'message':"No Data Faound"}
-            return render(request, 'blood_doner.html', context)
+    #         except:
+    #             context['message'] = "No Data Found"
+    #             return render(request, 'blood_doner.html', context)
+    #     else:
+    #         context['message'] = "No Data Found"
+    #         return render(request, 'blood_doner.html', context)
 
-    members = Member.objects.filter(want_to_donate_blood = True)
-    context = {'members':members}
-    return render(request, 'blood_doner.html', context)
+    # members = Member.objects.filter(want_to_donate_blood = True)
+    # context.update({'members':members})
+    # return render(request, 'blood_doner.html', context)
 
 import datetime
 @login_required(login_url='/')

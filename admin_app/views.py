@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from admin_app.forms import *
+from django.contrib.auth.decorators import login_required
+from familydataapp.urls import*
 # Create your views here.
+
+@login_required(login_url='/')
 def admin_home(request):
     return render(request, 'admin/admin_home.html')
 
 
+@login_required(login_url='/')
 def add_member(request):
     if request.method == 'POST':
         print('jnfoi')
@@ -23,6 +28,7 @@ def add_member(request):
     return render(request, 'admin/add_member.html')
 
 
+@login_required(login_url='/')
 def add_number(request):
     if request.method == 'POST':
         print('jnfoi')
@@ -41,6 +47,7 @@ def add_number(request):
     return render(request, 'admin/add_important_number.html')
 
 
+@login_required(login_url='/')
 def add_prayer_place(request):
     if request.method == 'POST':
         
@@ -59,7 +66,7 @@ def add_prayer_place(request):
     return render(request, 'admin/add_prayer_place')
 
 
-
+@login_required(login_url='/')
 def add_institute(request):
     if request.method == 'POST':
         form = InstitutionForm(request.POST)
@@ -77,6 +84,7 @@ def add_institute(request):
     return render(request, 'admin/add_institute.html')
 
 
+@login_required(login_url='/')
 def add_crime_team(request):
     if request.method == 'POST':
         print('This is post view')
@@ -95,6 +103,7 @@ def add_crime_team(request):
     return render(request, 'admin/add_crime_team.html')
 
 
+@login_required(login_url='/')
 def add_crime_type(request):
     if request.method == 'POST':
         form = CrimeTypeForm(request.POST)
@@ -108,6 +117,8 @@ def add_crime_type(request):
         context = {'form':form}
         return render(request, 'admin/add_crime_type.html', context)
     
+
+@login_required(login_url='/')
 def add_crime_place(request):
     if request.method == 'POST':
         form = CrimePlaceForm(request.POST)

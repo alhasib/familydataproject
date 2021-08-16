@@ -33,6 +33,7 @@ class District(models.Model):
         return self.name
 
 class BloodGroup(models.Model):
+    
     name_of_group = models.CharField(max_length = 250)
 
     def __str__(self):

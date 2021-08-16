@@ -3,7 +3,7 @@ from familydataapp.views import *
 from .views import *
 
 urlpatterns = [
-    path('my-admin/', admin_home),
+    path('my-admin/', admin_home, name="admin-home"),
     path('add-institute/', add_institute, name = 'add_institute'),
     path('add-crime-team/', add_crime_team, name = 'add_crime_team'),
 
